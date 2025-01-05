@@ -1,0 +1,11 @@
+<!-- app/views/movies/index.html.erb -->
+
+<h1>Movie List</h1>
+
+<ul>
+    <% @movies.each do |movie| %>
+        <li>
+        <%= link_to movie.title,movie_path(movie) %> - <%= movie.genre %>
+        </li>
+    <% end %>
+</ul>
