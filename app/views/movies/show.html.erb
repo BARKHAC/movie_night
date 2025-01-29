@@ -4,3 +4,18 @@
 <p><%= @movie.description %></p>
 <p><%= @movie.release_year%></p>
 <p><%= @movie.genre %></p>
+<%= form_with(model: [@movie, @rating], local: true) do |form| %>
+    <%= form.label :rating, "Rate this movie" %>
+    <%= form.number_field :rating, min: 1, max: 5 %>
+    <%= form.submit "Rate" %>
+  <% end %>
+  
+  
+  <p>Average Rating: <%= @movie.average_rating %> / 5</p>
+
+  <h3>Ratings:</h3>
+  <ul>
+    <% @movie.ratings.each do |rating| %>
+      <li><%= rating.rating %>/5 by <%= rating.user.email if rating.user %></li>
+    <% end %>
+  </ul>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   get 'home/index'
-  resources :movies
+  resources :movies do
+    resources :ratings, only: [:create]
+  end
   root 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
