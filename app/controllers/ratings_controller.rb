@@ -1,5 +1,6 @@
 class RatingsController < ApplicationController
-    before_action :set_movie
+    before_action :authenticate_user!  # This will require users to be logged in
+    before_action :set_movie, only: [:create]
     def create
       @movie = Movie.find(params[:movie_id])
       @rating = @movie.ratings.build(rating_params)
@@ -16,6 +17,9 @@ class RatingsController < ApplicationController
     end
   
     private
+    def set_movie
+        @movie = Movie.find(params[:movie_id])
+    end
   
     def rating_params
       params.require(:rating).permit(:rating)

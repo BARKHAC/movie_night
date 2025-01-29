@@ -9,5 +9,17 @@ import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 
 Rails.start()
-Turbolinks.start()
 ActiveStorage.start()
+
+document.querySelector('#sign_out_button').addEventListener('click', function(event) {
+    event.preventDefault();
+    fetch('/users/sign_out', {
+      method: 'DELETE',
+      headers: {
+        'X-CSRF-Token': document.querySelector('[name="csrf-token"]').content
+      },
+      credentials: 'same-origin'
+    }).then(() => {
+      window.location.href = '/'; // Redirect after sign-out
+    });
+  });

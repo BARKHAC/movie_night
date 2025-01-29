@@ -8,11 +8,20 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-   
-
   </head>
 
   <body>
+    <header>
+      <nav>
+        <%= link_to 'Home', root_path %> | 
+        <%= link_to 'Movies', movies_path if user_signed_in? %> | 
+        <%= link_to 'Sign In', new_user_session_path unless user_signed_in? %> | 
+        <%= link_to 'Sign Out', '#', id: 'sign_out_button', class: 'btn btn-danger' %>
+
+
+      </nav>
+    </header>
+    
     <%= yield %>
   </body>
 </html>
